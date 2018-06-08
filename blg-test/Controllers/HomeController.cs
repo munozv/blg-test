@@ -26,5 +26,10 @@ namespace blg_test.Controllers
 
             return View();
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
     }
 }

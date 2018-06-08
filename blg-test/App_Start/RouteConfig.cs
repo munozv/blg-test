@@ -18,6 +18,11 @@ namespace blg_test
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+               name: "Api",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "DbApi", action = "Index", id = UrlParameter.Optional }
+           );
         }
     }
 }
