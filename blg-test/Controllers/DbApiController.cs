@@ -9,19 +9,21 @@ using System.Web.Http;
 
 namespace blg_test.Controllers
 {
-    public class DbApiController : ApiController
+    public class UserDataController : ApiController
     {
         private IDbApiRepository _dbApiRepository;
 
-        public DbApiController()
+        public UserDataController()
         {
             _dbApiRepository = new DbApiRepository();
         }
 
-        public IHttpActionResult LogUser(string firstName, string lastName, string userEmail, string userPhone, string ipAddress)
+        [HttpPost]
+        public IHttpActionResult Post([FromBody]User newUser)
         {
-            User user = _dbApiRepository.RecordUser(firstName, lastName, userEmail, userPhone, ipAddress);
-            return Ok();
+            User user = _dbApiRepository.RecordUser(newUser);
+            return Ok(user);
         }
+
     }
 }

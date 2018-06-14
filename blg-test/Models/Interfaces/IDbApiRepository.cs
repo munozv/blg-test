@@ -7,6 +7,6 @@ namespace blg_test.Models.Interfaces
 {
     public interface IDbApiRepository
     {
-        User RecordUser(string firstName, string lastName, string userEmail, string userPhone, string ipAddress);
+        User RecordUser(User newUser);
     }
 }

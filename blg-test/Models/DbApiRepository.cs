@@ -8,13 +8,14 @@ namespace blg_test.Models
 {
     public class DbApiRepository : IDbApiRepository
     {
-        public User RecordUser(string firstName, string lastName, string userEmail, string userPhone, string ipAddress)
+        public User RecordUser(User newUser)
         {
             var entities = new Entities();
+            newUser.Id = 0;
+            var result = entities.Users.Add(newUser);
 
-            var newUser = entities.Users.Add(new User() { FirstName = firstName, LastName = lastName, Email = userEmail, Phone = userEmail, IpAddress = ipAddress });
-
-            return newUser;
+            entities.SaveChanges();
+            return result;
         }
     }
 }
