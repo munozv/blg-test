@@ -1,4 +1,4 @@
-﻿class UserForm extends React.Component {
+﻿class AddressForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -6,7 +6,9 @@
             Lastname: "",
             UserEmail: "",
             UserPhone: "",
-            ClientIpAddress: ""
+            ClientIpAddress: "",
+            emailValid: true,
+            phoneValid: true
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,8 +27,26 @@
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
 
+        this.setState({ [name]: value }, () => { this.validateField(name, value) });
+    }
+
+    validateField(fieldName, value) {
+        let emailValid = this.state.emailValid;
+        let passwordValid = this.state.passwordValid;
+
+        switch (fieldName) {
+            case 'email':
+                this.state.emailValid = value.match(/^\S+@\S+\.\S+$/);
+                break;
+            case 'phone':
+                this.state.phoneValid = value.match(/^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/);
+                break;
+            default:
+                break;
+        }
         this.setState({
-            [name]: value
+            emailValid: emailValid,
+            passwordValid: passwordValid
         });
     }
 
@@ -56,8 +76,8 @@
     handleSubmit(event) {
         event.preventDefault();
         Promise.resolve(this.LogUserIntoDb()).
-            then((user) => {
-                alert(user);
+            then((userId) => {
+                window.location.assign('/AddressForm/' + userId);
             });
     }
 
@@ -65,9 +85,10 @@
         return (
             <div className="UserForm">
                 <form onSubmit={this.handleSubmit}>
-                    <label> First Name :
-                        <input type="text" name="Firstname" value={this.state.Firstname} onChange={this.handleInputChange} />
-                    </label>
+                    <div class="form-group has-error">
+                        <label class="control-label"> First Name : </label>
+                        <input type="text" class="form-control" name="Firstname" value={this.state.Firstname} onChange={this.handleInputChange} />
+                       <div>
                     <br />
                     <label> Last Name :
                         <input type="text" name="Lastname" value={this.state.Lastname} onChange={this.handleInputChange} />
@@ -89,6 +110,6 @@
 }
 
 ReactDOM.render(
-    <UserForm />,
+    <AddressForm />,
     document.getElementById('content')
 );
