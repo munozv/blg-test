@@ -8,7 +8,10 @@
             Phone: "",
             ClientIpAddress: "",
             EmailIsValid: true,
-            PhoneIsValid: true
+            PhoneIsValid: true,
+            FirstnameIsValid: true,
+            LastnameIsValid: true,
+            IsLoading: false
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +31,7 @@
         const name = target.name;
 
         this.setState({ [name]: value });
-       this.validateField(name, value);
+        this.validateField(name, value);
     }
 
     LogUserIntoDb() {
@@ -56,43 +59,67 @@
 
     handleSubmit(event) {
         event.preventDefault();
-        Promise.resolve(this.LogUserIntoDb()).
-            then((userId) => {
-                window.location.assign('/React/AddressForm/' + userId);
-            });
+        this.setState({ IsLoading: true });
+        if (this.validateField("", "")) {
+            Promise.resolve(this.LogUserIntoDb()).
+                then((userId) => {
+                    window.location.assign('/React/AddressForm/' + userId);
+                });
+        }
+        else {
+            this.setState({ IsLoading: false });
+        }
     }
 
     validateField(fieldName, value) {
         let isEmailValid = this.state.EmailIsValid;
         let isPhoneValid = this.state.PhoneIsValid;
-
+        let isFirstnameValid = this.state.FirstnameIsValid;
+        let isLastnameValid = this.state.LastnameIsValid;
+        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/;
+        let phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
         switch (fieldName) {
             case 'Email':
-                isEmailValid = (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/).test(value);
+                isEmailValid = emailRegex.test(value);
                 break;
             case 'Phone':
-                isPhoneValid = (/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/).test(value);
+                isPhoneValid = phoneRegex.test(value);
+                break;
+            case 'Firstname':
+                isFirstnameValid = value.length > 0;
+                break;
+            case 'Lastname':
+                isLastnameValid = value.length > 0;
                 break;
             default:
+                isEmailValid = emailRegex.test(this.state.Email);
+                isPhoneValid = phoneRegex.test(this.state.Phone);
+                isFirstnameValid = this.state.Firstname.length > 0;
+                isLastnameValid = this.state.Lastname.length > 0;
                 break;
         }
         this.setState({
             EmailIsValid: isEmailValid,
-            PhoneIsValid: isPhoneValid
+            PhoneIsValid: isPhoneValid,
+            FirstnameIsValid: isFirstnameValid,
+            LastnameIsValid: isLastnameValid
         });
+        return (isEmailValid && isPhoneValid && isFirstnameValid && isLastnameValid)
     }
 
     render() {
         return (
-            <div className="UserForm">
+            <div className="UserForm" style={{ foreground: 'gray' }}>
                 <br />
-
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
+                <div id='overlay' style={{ visibility: this.state.IsLoading ? 'visible' : 'hidden' }} >
+                    <div className="loader" style={{ position: 'absolute', left: '30%', top: '100px' }} />
+                </div>
+                <form onSubmit={this.handleSubmit} >
+                    <div className={"form-group " + (this.state.FirstnameIsValid ? '' : 'has-error')}>
                         <label className="control-label"> First Name :</label>
                         <input type="text" className="form-control" name="Firstname" value={this.state.Firstname} onChange={this.handleInputChange} />
                     </div>
-                    <div className="form-group">
+                    <div className={"form-group " + (this.state.LastnameIsValid ? '' : 'has-error')}>
                         <label className="control-label"> Last Name : </label>
                         <input type="text" className="form-control" name="Lastname" value={this.state.Lastname} onChange={this.handleInputChange} />
                     </div>
