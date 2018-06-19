@@ -24,5 +24,22 @@ namespace blg_test.Models
             var result = entities.Users.Single(x => x.Id == userId);
             return result;
         }
+
+        public Address RecordAddress(Address newAddress)
+        {
+            var entities = new Entities();
+            newAddress.Id = 0;
+            var result = entities.Addresses.Add(newAddress);
+
+            entities.SaveChanges();
+            return result;
+        }
+
+        public Address GetAddress(int id)
+        {
+            var entities = new Entities();
+            var result = entities.Addresses.Single(x => x.Id == id);
+            return result;
+        }
     }
 }

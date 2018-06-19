@@ -199,6 +199,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs">
+      <DependentUpon>BlgEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\ReactConfig.cs" />
@@ -219,6 +222,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BlgEntity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AddressDataController.cs" />
     <Compile Include="Controllers\UserDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReactController.cs" />

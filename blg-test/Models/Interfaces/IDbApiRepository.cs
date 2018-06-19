@@ -9,5 +9,7 @@ namespace blg_test.Models.Interfaces
     {
         User RecordUser(User newUser);
         User GetUser(int userId);
+        Address RecordAddress(Address newAddress);
+        Address GetAddress(int id);
     }
 }

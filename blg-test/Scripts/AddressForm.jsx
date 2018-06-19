@@ -8,10 +8,13 @@
             Email: "",
             Phone: "",
             ClientIpAddress: "",
-            EmailIsValid: true,
-            PhoneIsValid: true,
-            FirstnameIsValid: true,
-            LastnameIsValid: true,
+            AddressLine1: "",
+            AddressLine2: "",
+            City: "",
+            Zipcode: "",
+            AddressLine1IsValid: true,
+            CityIsValid: true,
+            ZipcodeIsValid: true,
             IsLoading: true
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -49,20 +52,19 @@
         this.validateField(name, value);
     }
 
-    LogUserIntoDb() {
-        return fetch('/api/userData', {
+    LogAddressIntoDb() {
+        return fetch('/api/addressData', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                firstname: this.state.Firstname,
-                lastname: this.state.Lastname,
-                Email: this.state.UserEmail,
-                Phone: this.state.UserPhone,
-                IpAddress: this.state.ClientIpAddress
-
+                AddressLine1: this.state.AddressLine1,
+                AddressLine2: this.state.AddressLine2,
+                City: this.state.City,
+                Zipcode: this.state.Zipcode,
+                UserId: this.state.UserId
             }),
         }).then((response) => response.json())
             .then((responseJson) => {
@@ -76,9 +78,9 @@
         event.preventDefault();
         this.setState({ IsLoading: true });
         if (this.validateField("", "")) {
-            Promise.resolve(this.LogUserIntoDb()).
+            Promise.resolve(this.LogAddressIntoDb()).
                 then((userId) => {
-                    window.location.assign('/React/AddressForm/' + userId);
+                    //  window.location.assign('/React/AddressForm/' + userId);
                 });
         }
         else {
@@ -87,39 +89,35 @@
     }
 
     validateField(fieldName, value) {
-        let isEmailValid = this.state.EmailIsValid;
-        let isPhoneValid = this.state.PhoneIsValid;
-        let isFirstnameValid = this.state.FirstnameIsValid;
-        let isLastnameValid = this.state.LastnameIsValid;
-        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/;
-        let phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+        let isAdd1Valid = this.state.AddressLine1IsValid;
+        let isCityValid = this.state.CityIsValid;
+        let isZipCodeValid = this.state.ZipcodeIsValid;
+
         switch (fieldName) {
-            case 'Email':
-                isEmailValid = emailRegex.test(value);
+            case 'AddressLine1':
+                isAdd1Valid = value.length > 0;
                 break;
-            case 'Phone':
-                isPhoneValid = phoneRegex.test(value);
+            case 'City':
+                isCityValid = value.length > 0;
                 break;
-            case 'Firstname':
-                isFirstnameValid = value.length > 0;
+            case 'Zipcode':
+                isZipCodeValid = value.length > 0;
                 break;
-            case 'Lastname':
-                isLastnameValid = value.length > 0;
+            case 'AddressLine2':
                 break;
             default:
-                isEmailValid = emailRegex.test(this.state.Email);
-                isPhoneValid = phoneRegex.test(this.state.Phone);
-                isFirstnameValid = this.state.Firstname.length > 0;
-                isLastnameValid = this.state.Lastname.length > 0;
+                isAdd1Valid = this.state.AddressLine1.length > 0;
+                isCityValid = this.state.City.length > 0;
+                isZipCodeValid = this.state.Zipcode.length > 0;
                 break;
         }
+
         this.setState({
-            EmailIsValid: isEmailValid,
-            PhoneIsValid: isPhoneValid,
-            FirstnameIsValid: isFirstnameValid,
-            LastnameIsValid: isLastnameValid
+            AddressLine1IsValid: isAdd1Valid,
+            CityIsValid: isCityValid,
+            ZipcodeIsValid: isZipCodeValid
         });
-        return (isEmailValid && isPhoneValid && isFirstnameValid && isLastnameValid)
+        return (isAdd1Valid && isCityValid && isZipCodeValid)
     }
 
     render() {
@@ -130,7 +128,7 @@
                     <div className="loader" style={{ position: 'absolute', left: '30%', top: '100px' }} />
                 </div>
                 <label className="control-label">{'First Name: ' + this.state.Firstname}</label>
-                <br/>
+                <br />
                 <label className="control-label">{'Last Name: ' + this.state.Lastname}</label>
                 <br />
                 <label className="control-label">{'Email: ' + this.state.Email}</label>
@@ -140,6 +138,22 @@
                 <label className="control-label">{'Ip Address: ' + this.state.ClientIpAddress}</label>
                 <br />
                 <form onSubmit={this.handleSubmit} >
+                    <div className={"form-group " + (this.state.AddressLine1IsValid ? '' : 'has-error')}>
+                        <label className="control-label"> Address Line 1 :</label>
+                        <input type="text" className="form-control" name="AddressLine1" value={this.state.AddressLine1} onChange={this.handleInputChange} />
+                    </div>
+                    <div className={"form-group"}>
+                        <label className="control-label"> Address Line 2 : </label>
+                        <input type="text" className="form-control" name="AddressLine2" value={this.state.AddressLine2} onChange={this.handleInputChange} />
+                    </div>
+                    <div className={"form-group " + (this.state.CityIsValid ? '' : 'has-error')}>
+                        <label className="control-label"> City : </label>
+                        <input type="text" className="form-control" name="City" value={this.state.City} onChange={this.handleInputChange} />
+                    </div>
+                    <div className={"form-group " + (this.state.ZipcodeIsValid ? '' : 'has-error')}>
+                        <label className="control-label"> Zipcode :</label>
+                        <input type="text" className="form-control" name="Zipcode" value={this.state.Zipcode} onChange={this.handleInputChange} />
+                    </div>
                     <input type="submit" name="SubmitButton" value="Submit" />
                 </form>
             </div>
