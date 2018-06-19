@@ -17,5 +17,12 @@ namespace blg_test.Models
             entities.SaveChanges();
             return result;
         }
+
+        public User GetUser(int userId)
+        {
+            var entities = new Entities();
+            var result = entities.Users.Single(x => x.Id == userId);
+            return result;
+        }
     }
 }

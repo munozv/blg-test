@@ -219,7 +219,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BlgEntity.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\DbApiController.cs" />
+    <Compile Include="Controllers\UserDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReactController.cs" />
     <Compile Include="Global.asax.cs">

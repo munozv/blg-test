@@ -25,5 +25,11 @@ namespace blg_test.Controllers
             return Ok(user);
         }
 
+        public IHttpActionResult GetUserDataById(int id)
+        {
+            User user = _dbApiRepository.GetUser(id);
+            return Ok(user);
+        }
+
     }
 }

@@ -44,8 +44,8 @@
             body: JSON.stringify({
                 firstname: this.state.Firstname,
                 lastname: this.state.Lastname,
-                Email: this.state.UserEmail,
-                Phone: this.state.UserPhone,
+                Email: this.state.Email,
+                Phone: this.state.Phone,
                 IpAddress: this.state.ClientIpAddress
 
             }),
@@ -109,7 +109,7 @@
 
     render() {
         return (
-            <div className="UserForm" style={{ foreground: 'gray' }}>
+            <div className="UserForm">
                 <br />
                 <div id='overlay' style={{ visibility: this.state.IsLoading ? 'visible' : 'hidden' }} >
                     <div className="loader" style={{ position: 'absolute', left: '30%', top: '100px' }} />

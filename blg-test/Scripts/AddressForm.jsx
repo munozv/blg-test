@@ -2,6 +2,7 @@
     constructor(props) {
         super(props);
         this.state = {
+            UserId: 0,
             Firstname: "",
             Lastname: "",
             Email: "",
@@ -10,21 +11,32 @@
             EmailIsValid: true,
             PhoneIsValid: true,
             FirstnameIsValid: true,
-            LastnameIsValid: true
+            LastnameIsValid: true,
+            IsLoading: true
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        fetch('/api/userData' + this.state.UserId, {
+        var hrefArray = window.location.href.split('/');
+
+        fetch('/api/userData/' + hrefArray[hrefArray.length - 1], {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
             }
         }).then(res => res.json())
             .then(json => {
-                this.setState({ ClientIpAddress: json.ip });
+                this.setState({
+                    UserId: json.Id,
+                    Firstname: json.FirstName,
+                    Lastname: json.LastName,
+                    Email: json.Email,
+                    Phone: json.Phone,
+                    ClientIpAddress: json.IpAddress,
+                    IsLoading: false
+                });
             });
     }
 
@@ -62,11 +74,15 @@
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({ IsLoading: true });
         if (this.validateField("", "")) {
             Promise.resolve(this.LogUserIntoDb()).
                 then((userId) => {
                     window.location.assign('/React/AddressForm/' + userId);
                 });
+        }
+        else {
+            this.setState({ IsLoading: false });
         }
     }
 
@@ -108,26 +124,22 @@
 
     render() {
         return (
-            <div className="UserForm">
+            <div className="AddressForm">
                 <br />
-
-                <form onSubmit={this.handleSubmit}>
-                    <div className={"form-group " + (this.state.FirstnameIsValid ? '' : 'has-error')}>
-                        <label className="control-label"> First Name :</label>
-                        <input type="text" className="form-control" name="Firstname" value={this.state.Firstname} onChange={this.handleInputChange} />
-                    </div>
-                    <div className={"form-group " + (this.state.LastnameIsValid ? '' : 'has-error')}>
-                        <label className="control-label"> Last Name : </label>
-                        <input type="text" className="form-control" name="Lastname" value={this.state.Lastname} onChange={this.handleInputChange} />
-                    </div>
-                    <div className={"form-group " + (this.state.EmailIsValid ? '' : 'has-error')}>
-                        <label className="control-label"> Email : </label>
-                        <input type="text" className="form-control" name="Email" value={this.state.UserEmail} onChange={this.handleInputChange} />
-                    </div>
-                    <div className={"form-group " + (this.state.PhoneIsValid ? '' : 'has-error')}>
-                        <label className="control-label"> Phone :</label>
-                        <input type="text" className="form-control" name="Phone" value={this.state.UserPhone} onChange={this.handleInputChange} />
-                    </div>
+                <div id='overlay' style={{ visibility: this.state.IsLoading ? 'visible' : 'hidden' }} >
+                    <div className="loader" style={{ position: 'absolute', left: '30%', top: '100px' }} />
+                </div>
+                <label className="control-label">{'First Name: ' + this.state.Firstname}</label>
+                <br/>
+                <label className="control-label">{'Last Name: ' + this.state.Lastname}</label>
+                <br />
+                <label className="control-label">{'Email: ' + this.state.Email}</label>
+                <br />
+                <label className="control-label">{'Phone: ' + this.state.Phone}</label>
+                <br />
+                <label className="control-label">{'Ip Address: ' + this.state.ClientIpAddress}</label>
+                <br />
+                <form onSubmit={this.handleSubmit} >
                     <input type="submit" name="SubmitButton" value="Submit" />
                 </form>
             </div>
