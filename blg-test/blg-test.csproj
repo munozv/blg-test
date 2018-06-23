@@ -233,6 +233,9 @@
     <Compile Include="Controllers\UserDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReactController.cs" />
+    <Compile Include="Estimate.cs">
+      <DependentUpon>BlgEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -13,6 +13,11 @@
             City: "",
             State: "",
             Zipcode: "",
+            ApiAddress: "",
+            RentEstimate: "",
+            LowRentEstimate: "",
+            HighRentEstimate: "",
+            IsRentEstimateFromAPI: ""
 
         };
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -51,18 +56,25 @@
                             Email: json.Email,
                             Phone: json.Phone,
                             ClientIpAddress: json.IpAddress,
+                        });
+                    });
+                fetch('/api/EstimateData?address=' + encodeURI(this.state.AddressLine1 + ' ' + this.state.AddressLine2) + '&citystatezip=' + encodeURI(this.state.City + ' ' + this.state.State + ' ' + this.state.Zipcode), {
+                    method: 'GET',
+                    headers: {
+                        Accept: 'application/json',
+                    }
+                }).then(res => res.json())
+                    .then(json => {
+                        this.setState({
+                            ApiAddress: json.ApiAddress,
+                            RentEstimate: json.RentEstimate,
+                            LowRentEstimate: json.LowRentRange,
+                            HighRentEstimate: json.HighRentRange,
+                            IsRentEstimateFromAPI: json.IsRentEstimateFromAPI,
                             IsLoading: false
                         });
-                        fetch('/api/EstimateData?address=' + encodeURI(this.state.AddressLine1 + ' ' + this.state.AddressLine2) + '&citystatezip=' + encodeURI(this.state.City + ' ' + this.state.State + ' ' + this.state.Zipcode), {
-                            method: 'GET',
-                            headers: {
-                                Accept: 'application/json',
-                            }
-                        }).then(res => res)
-                            .then(json => {
-                                
-                            });
                     });
+
             });
     }
 
@@ -142,7 +154,17 @@
                 <br />
                 <label className="control-label">{'Zipcode: ' + this.state.Zipcode}</label>
                 <br />
+                <label className="control-label">{'Rent Estimate: ' + this.state.RentEstimate}</label>
                 <br />
+                <label className="control-label">{'Low Rent Range: ' + this.state.LowRentEstimate}</label>
+                <br />
+                <label className="control-label">{'High Rent Range: ' + this.state.HighRentEstimate}</label>
+                <br />
+                <label className="control-label">{'Address Reference: ' + this.state.ApiAddress}</label>
+                <br />
+                <label className="control-label">{'Rent was calculated from property Zestimate: ' + !this.state.IsRentEstimateFromAPI}</label>
+                <br />
+
             </div>
         );
     }

@@ -30,7 +30,7 @@ namespace blg_test.Models
             return result;
         }
 
-        public Address RecordAddress(Address newAddress)
+        public blg_test.Address RecordAddress(blg_test.Address newAddress)
         {
             var entities = new Entities();
             newAddress.Id = 0;
@@ -46,10 +46,25 @@ namespace blg_test.Models
             return result;
         }
 
-        public Address GetAddress(int id)
+        public blg_test.Address GetAddress(int id)
         {
             var entities = new Entities();
             var result = entities.Addresses.Single(x => x.Id == id);
+            return result;
+        }
+
+        Estimate IDbApiRepository.RecordEstimate(Estimate est)
+        {
+            var entities = new Entities();
+            var result = entities.Estimates.Add(est);
+
+            return result;
+        }
+
+        public Estimate GetEstimate(int id)
+        {
+            var entities = new Entities();
+            var result = entities.Estimates.Single(x => x.Id == id);
             return result;
         }
     }

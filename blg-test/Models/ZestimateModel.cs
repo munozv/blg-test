@@ -7,178 +7,1183 @@ namespace blg_test.Models
 {
     public class ZestimateModel
     {
-        public Xml xml { get; set; }
-        public SearchresultsSearchresults SearchResultssearchresults { get; set; }
-    }
 
-    public class Xml
-    {
-        public string version { get; set; }
-        public string encoding { get; set; }
-    }
+        // NOTE: Generated code may require at least .NET Framework 4.5 or .NET Core/Standard 2.0.
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.zillow.com/static/xsd/SearchResults.xsd")]
+        [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.zillow.com/static/xsd/SearchResults.xsd", IsNullable = false)]
+        public partial class searchresults
+        {
 
-    public class SearchresultsSearchresults
-    {
-        public string xsischemaLocation { get; set; }
-        public string xmlnsxsi { get; set; }
-        public string xmlnsSearchResults { get; set; }
-        public Request request { get; set; }
-        public Message message { get; set; }
-        public Response response { get; set; }
-    }
+            private request requestField;
 
-    public class Request
-    {
-        public string address { get; set; }
-        public string citystatezip { get; set; }
-    }
+            private message messageField;
 
-    public class Message
-    {
-        public string text { get; set; }
-        public string code { get; set; }
-    }
+            private response responseField;
 
-    public class Response
-    {
-        public Results results { get; set; }
-    }
+            /// <remarks/>
+            [System.Xml.Serialization.XmlElementAttribute(Namespace = "")]
+            public request request
+            {
+                get
+                {
+                    return this.requestField;
+                }
+                set
+                {
+                    this.requestField = value;
+                }
+            }
 
-    public class Results
-    {
-        public Result[] result { get; set; }
-    }
+            /// <remarks/>
+            [System.Xml.Serialization.XmlElementAttribute(Namespace = "")]
+            public message message
+            {
+                get
+                {
+                    return this.messageField;
+                }
+                set
+                {
+                    this.messageField = value;
+                }
+            }
 
-    public class Result
-    {
-        public string zpid { get; set; }
-        public Links links { get; set; }
-        public Address address { get; set; }
-        public Zestimate zestimate { get; set; }
-        public Localrealestate localRealEstate { get; set; }
-        public Rentzestimate rentzestimate { get; set; }
-    }
+            /// <remarks/>
+            [System.Xml.Serialization.XmlElementAttribute(Namespace = "")]
+            public response response
+            {
+                get
+                {
+                    return this.responseField;
+                }
+                set
+                {
+                    this.responseField = value;
+                }
+            }
+        }
 
-    public class Links
-    {
-        public string homedetails { get; set; }
-        public string mapthishome { get; set; }
-        public string comparables { get; set; }
-    }
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+        public partial class request
+        {
 
-    public class Address
-    {
-        public string street { get; set; }
-        public string zipcode { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string latitude { get; set; }
-        public string longitude { get; set; }
-    }
+            private string addressField;
 
-    public class Zestimate
-    {
-        public Amount amount { get; set; }
-        public string lastupdated { get; set; }
-        public Oneweekchange oneWeekChange { get; set; }
-        public string valueChange { get; set; }
-        public Valuationrange valuationRange { get; set; }
-        public string percentile { get; set; }
-    }
+            private string citystatezipField;
 
-    public class Amount
-    {
-        public string currency { get; set; }
-        public string text { get; set; }
-    }
+            /// <remarks/>
+            public string address
+            {
+                get
+                {
+                    return this.addressField;
+                }
+                set
+                {
+                    this.addressField = value;
+                }
+            }
 
-    public class Oneweekchange
-    {
-        public string deprecated { get; set; }
-    }
+            /// <remarks/>
+            public string citystatezip
+            {
+                get
+                {
+                    return this.citystatezipField;
+                }
+                set
+                {
+                    this.citystatezipField = value;
+                }
+            }
+        }
 
-    public class Valuationrange
-    {
-        public Low low { get; set; }
-        public High high { get; set; }
-    }
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+        public partial class message
+        {
 
-    public class Low
-    {
-        public string currency { get; set; }
-        public string text { get; set; }
-    }
+            private string textField;
 
-    public class High
-    {
-        public string currency { get; set; }
-        public string text { get; set; }
-    }
+            private byte codeField;
 
-    public class Localrealestate
-    {
-        public Region region { get; set; }
-    }
+            /// <remarks/>
+            public string text
+            {
+                get
+                {
+                    return this.textField;
+                }
+                set
+                {
+                    this.textField = value;
+                }
+            }
 
-    public class Region
-    {
-        public string name { get; set; }
-        public string id { get; set; }
-        public string type { get; set; }
-        public string zindexValue { get; set; }
-        public Links1 links { get; set; }
-    }
+            /// <remarks/>
+            public byte code
+            {
+                get
+                {
+                    return this.codeField;
+                }
+                set
+                {
+                    this.codeField = value;
+                }
+            }
+        }
 
-    public class Links1
-    {
-        public string overview { get; set; }
-        public string forSaleByOwner { get; set; }
-        public string forSale { get; set; }
-    }
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
+        public partial class response
+        {
 
-    public class Rentzestimate
-    {
-        public Amount1 amount { get; set; }
-        public string lastupdated { get; set; }
-        public Oneweekchange1 oneWeekChange { get; set; }
-        public Valuechange valueChange { get; set; }
-        public Valuationrange1 valuationRange { get; set; }
-    }
+            private responseResult[] resultsField;
 
-    public class Amount1
-    {
-        public string currency { get; set; }
-        public string text { get; set; }
-    }
+            /// <remarks/>
+            [System.Xml.Serialization.XmlArrayItemAttribute("result", IsNullable = false)]
+            public responseResult[] results
+            {
+                get
+                {
+                    return this.resultsField;
+                }
+                set
+                {
+                    this.resultsField = value;
+                }
+            }
+        }
 
-    public class Oneweekchange1
-    {
-        public string deprecated { get; set; }
-    }
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResult
+        {
 
-    public class Valuechange
-    {
-        public string duration { get; set; }
-        public string currency { get; set; }
-        public string text { get; set; }
-    }
+            private uint zpidField;
 
-    public class Valuationrange1
-    {
-        public Low1 low { get; set; }
-        public High1 high { get; set; }
-    }
+            private responseResultLinks linksField;
 
-    public class Low1
-    {
-        public string currency { get; set; }
-        public string text { get; set; }
-    }
+            private responseResultAddress addressField;
 
-    public class High1
-    {
-        public string currency { get; set; }
-        public string text { get; set; }
+            private responseResultZestimate zestimateField;
+
+            private responseResultRentzestimate rentzestimateField;
+
+            private responseResultLocalRealEstate localRealEstateField;
+
+            /// <remarks/>
+            public uint zpid
+            {
+                get
+                {
+                    return this.zpidField;
+                }
+                set
+                {
+                    this.zpidField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultLinks links
+            {
+                get
+                {
+                    return this.linksField;
+                }
+                set
+                {
+                    this.linksField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultAddress address
+            {
+                get
+                {
+                    return this.addressField;
+                }
+                set
+                {
+                    this.addressField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultZestimate zestimate
+            {
+                get
+                {
+                    return this.zestimateField;
+                }
+                set
+                {
+                    this.zestimateField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultRentzestimate rentzestimate
+            {
+                get
+                {
+                    return this.rentzestimateField;
+                }
+                set
+                {
+                    this.rentzestimateField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultLocalRealEstate localRealEstate
+            {
+                get
+                {
+                    return this.localRealEstateField;
+                }
+                set
+                {
+                    this.localRealEstateField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultLinks
+        {
+
+            private string homedetailsField;
+
+            private string mapthishomeField;
+
+            private string comparablesField;
+
+            /// <remarks/>
+            public string homedetails
+            {
+                get
+                {
+                    return this.homedetailsField;
+                }
+                set
+                {
+                    this.homedetailsField = value;
+                }
+            }
+
+            /// <remarks/>
+            public string mapthishome
+            {
+                get
+                {
+                    return this.mapthishomeField;
+                }
+                set
+                {
+                    this.mapthishomeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public string comparables
+            {
+                get
+                {
+                    return this.comparablesField;
+                }
+                set
+                {
+                    this.comparablesField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultAddress
+        {
+
+            private string streetField;
+
+            private uint zipcodeField;
+
+            private string cityField;
+
+            private string stateField;
+
+            private decimal latitudeField;
+
+            private decimal longitudeField;
+
+            /// <remarks/>
+            public string street
+            {
+                get
+                {
+                    return this.streetField;
+                }
+                set
+                {
+                    this.streetField = value;
+                }
+            }
+
+            /// <remarks/>
+            public uint zipcode
+            {
+                get
+                {
+                    return this.zipcodeField;
+                }
+                set
+                {
+                    this.zipcodeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public string city
+            {
+                get
+                {
+                    return this.cityField;
+                }
+                set
+                {
+                    this.cityField = value;
+                }
+            }
+
+            /// <remarks/>
+            public string state
+            {
+                get
+                {
+                    return this.stateField;
+                }
+                set
+                {
+                    this.stateField = value;
+                }
+            }
+
+            /// <remarks/>
+            public decimal latitude
+            {
+                get
+                {
+                    return this.latitudeField;
+                }
+                set
+                {
+                    this.latitudeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public decimal longitude
+            {
+                get
+                {
+                    return this.longitudeField;
+                }
+                set
+                {
+                    this.longitudeField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultZestimate
+        {
+
+            private responseResultZestimateAmount amountField;
+
+            private string lastupdatedField;
+
+            private responseResultZestimateOneWeekChange oneWeekChangeField;
+
+            private object valueChangeField;
+
+            private responseResultZestimateValuationRange valuationRangeField;
+
+            private byte percentileField;
+
+            /// <remarks/>
+            public responseResultZestimateAmount amount
+            {
+                get
+                {
+                    return this.amountField;
+                }
+                set
+                {
+                    this.amountField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlElementAttribute("last-updated")]
+            public string lastupdated
+            {
+                get
+                {
+                    return this.lastupdatedField;
+                }
+                set
+                {
+                    this.lastupdatedField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultZestimateOneWeekChange oneWeekChange
+            {
+                get
+                {
+                    return this.oneWeekChangeField;
+                }
+                set
+                {
+                    this.oneWeekChangeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public object valueChange
+            {
+                get
+                {
+                    return this.valueChangeField;
+                }
+                set
+                {
+                    this.valueChangeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultZestimateValuationRange valuationRange
+            {
+                get
+                {
+                    return this.valuationRangeField;
+                }
+                set
+                {
+                    this.valuationRangeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public byte percentile
+            {
+                get
+                {
+                    return this.percentileField;
+                }
+                set
+                {
+                    this.percentileField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultZestimateAmount
+        {
+
+            private string currencyField;
+
+            private string valueField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string currency
+            {
+                get
+                {
+                    return this.currencyField;
+                }
+                set
+                {
+                    this.currencyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public string Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultZestimateOneWeekChange
+        {
+
+            private bool deprecatedField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public bool deprecated
+            {
+                get
+                {
+                    return this.deprecatedField;
+                }
+                set
+                {
+                    this.deprecatedField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultZestimateValuationRange
+        {
+
+            private responseResultZestimateValuationRangeLow lowField;
+
+            private responseResultZestimateValuationRangeHigh highField;
+
+            /// <remarks/>
+            public responseResultZestimateValuationRangeLow low
+            {
+                get
+                {
+                    return this.lowField;
+                }
+                set
+                {
+                    this.lowField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultZestimateValuationRangeHigh high
+            {
+                get
+                {
+                    return this.highField;
+                }
+                set
+                {
+                    this.highField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultZestimateValuationRangeLow
+        {
+
+            private string currencyField;
+
+            private string valueField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string currency
+            {
+                get
+                {
+                    return this.currencyField;
+                }
+                set
+                {
+                    this.currencyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public string Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultZestimateValuationRangeHigh
+        {
+
+            private string currencyField;
+
+            private string valueField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string currency
+            {
+                get
+                {
+                    return this.currencyField;
+                }
+                set
+                {
+                    this.currencyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public string Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultRentzestimate
+        {
+
+            private responseResultRentzestimateAmount amountField;
+
+            private string lastupdatedField;
+
+            private responseResultRentzestimateOneWeekChange oneWeekChangeField;
+
+            private responseResultRentzestimateValueChange valueChangeField;
+
+            private responseResultRentzestimateValuationRange valuationRangeField;
+
+            /// <remarks/>
+            public responseResultRentzestimateAmount amount
+            {
+                get
+                {
+                    return this.amountField;
+                }
+                set
+                {
+                    this.amountField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlElementAttribute("last-updated")]
+            public string lastupdated
+            {
+                get
+                {
+                    return this.lastupdatedField;
+                }
+                set
+                {
+                    this.lastupdatedField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultRentzestimateOneWeekChange oneWeekChange
+            {
+                get
+                {
+                    return this.oneWeekChangeField;
+                }
+                set
+                {
+                    this.oneWeekChangeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultRentzestimateValueChange valueChange
+            {
+                get
+                {
+                    return this.valueChangeField;
+                }
+                set
+                {
+                    this.valueChangeField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultRentzestimateValuationRange valuationRange
+            {
+                get
+                {
+                    return this.valuationRangeField;
+                }
+                set
+                {
+                    this.valuationRangeField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultRentzestimateAmount
+        {
+
+            private string currencyField;
+
+            private ushort valueField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string currency
+            {
+                get
+                {
+                    return this.currencyField;
+                }
+                set
+                {
+                    this.currencyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public ushort Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultRentzestimateOneWeekChange
+        {
+
+            private bool deprecatedField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public bool deprecated
+            {
+                get
+                {
+                    return this.deprecatedField;
+                }
+                set
+                {
+                    this.deprecatedField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultRentzestimateValueChange
+        {
+
+            private byte durationField;
+
+            private string currencyField;
+
+            private byte valueField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public byte duration
+            {
+                get
+                {
+                    return this.durationField;
+                }
+                set
+                {
+                    this.durationField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string currency
+            {
+                get
+                {
+                    return this.currencyField;
+                }
+                set
+                {
+                    this.currencyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public byte Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultRentzestimateValuationRange
+        {
+
+            private responseResultRentzestimateValuationRangeLow lowField;
+
+            private responseResultRentzestimateValuationRangeHigh highField;
+
+            /// <remarks/>
+            public responseResultRentzestimateValuationRangeLow low
+            {
+                get
+                {
+                    return this.lowField;
+                }
+                set
+                {
+                    this.lowField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultRentzestimateValuationRangeHigh high
+            {
+                get
+                {
+                    return this.highField;
+                }
+                set
+                {
+                    this.highField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultRentzestimateValuationRangeLow
+        {
+
+            private string currencyField;
+
+            private ushort valueField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string currency
+            {
+                get
+                {
+                    return this.currencyField;
+                }
+                set
+                {
+                    this.currencyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public ushort Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultRentzestimateValuationRangeHigh
+        {
+
+            private string currencyField;
+
+            private ushort valueField;
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string currency
+            {
+                get
+                {
+                    return this.currencyField;
+                }
+                set
+                {
+                    this.currencyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public ushort Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultLocalRealEstate
+        {
+
+            private responseResultLocalRealEstateRegion regionField;
+
+            /// <remarks/>
+            public responseResultLocalRealEstateRegion region
+            {
+                get
+                {
+                    return this.regionField;
+                }
+                set
+                {
+                    this.regionField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultLocalRealEstateRegion
+        {
+
+            private string zindexValueField;
+
+            private responseResultLocalRealEstateRegionLinks linksField;
+
+            private string nameField;
+
+            private ushort idField;
+
+            private string typeField;
+
+            /// <remarks/>
+            public string zindexValue
+            {
+                get
+                {
+                    return this.zindexValueField;
+                }
+                set
+                {
+                    this.zindexValueField = value;
+                }
+            }
+
+            /// <remarks/>
+            public responseResultLocalRealEstateRegionLinks links
+            {
+                get
+                {
+                    return this.linksField;
+                }
+                set
+                {
+                    this.linksField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string name
+            {
+                get
+                {
+                    return this.nameField;
+                }
+                set
+                {
+                    this.nameField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public ushort id
+            {
+                get
+                {
+                    return this.idField;
+                }
+                set
+                {
+                    this.idField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public string type
+            {
+                get
+                {
+                    return this.typeField;
+                }
+                set
+                {
+                    this.typeField = value;
+                }
+            }
+        }
+
+        /// <remarks/>
+        [System.SerializableAttribute()]
+        [System.ComponentModel.DesignerCategoryAttribute("code")]
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class responseResultLocalRealEstateRegionLinks
+        {
+
+            private string overviewField;
+
+            private string forSaleByOwnerField;
+
+            private string forSaleField;
+
+            /// <remarks/>
+            public string overview
+            {
+                get
+                {
+                    return this.overviewField;
+                }
+                set
+                {
+                    this.overviewField = value;
+                }
+            }
+
+            /// <remarks/>
+            public string forSaleByOwner
+            {
+                get
+                {
+                    return this.forSaleByOwnerField;
+                }
+                set
+                {
+                    this.forSaleByOwnerField = value;
+                }
+            }
+
+            /// <remarks/>
+            public string forSale
+            {
+                get
+                {
+                    return this.forSaleField;
+                }
+                set
+                {
+                    this.forSaleField = value;
+                }
+            }
+        }
+
+
     }
 
 }

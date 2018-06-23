@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Xml;
 using System.Web;
 using System.Web.Http;
+using System.Xml.Serialization;
 
 namespace blg_test.Controllers
 {
@@ -43,48 +44,52 @@ namespace blg_test.Controllers
 
             xml.LoadXml(result.Content.ReadAsStringAsync().Result);
 
-            string json = JsonConvert.SerializeXmlNode(xml);
+            XmlSerializer serializer = new XmlSerializer(typeof(ZestimateModel.searchresults));
+            XmlReader xmlReader = new XmlNodeReader(xml);
+            ZestimateModel.searchresults xmlModel = (ZestimateModel.searchresults)serializer.Deserialize(xmlReader);
 
-            ZestimateModel jsonModel = JsonConvert.DeserializeObject<ZestimateModel>(json);
-            EstimateRange range = null;
-            foreach (var eval in jsonModel.SearchResultssearchresults.response.results.result)
+            Estimate range = null;
+            foreach (var eval in xmlModel.response.results)
             {
                 if (eval.rentzestimate != null &&
                     eval.rentzestimate.amount != null &&
-                    !string.IsNullOrWhiteSpace(eval.rentzestimate.amount.text))
+                    !string.IsNullOrWhiteSpace(eval.rentzestimate.amount.Value.ToString()))
                 {
-                    range = new EstimateRange();
-                    range.IsRentFromAPI = true;
-                    range.HighRange = eval.rentzestimate.valuationRange.high.text;
-                    range.LowRange = eval.rentzestimate.valuationRange.low.text;
-                    range.RentEstimate = eval.rentzestimate.amount.text;
-                    range.Address = eval.address.street + " " + eval.address.city + " " + eval.address.zipcode + " " + eval.address.state;
+                    range = new Estimate();
+                    range.IsRentEstimateFromAPI = true;
+                    range.HighRentRange = eval.rentzestimate.valuationRange.high.Value.ToString();
+                    range.LowRentRange = eval.rentzestimate.valuationRange.low.Value.ToString();
+                    range.RentEstimate = eval.rentzestimate.amount.Value.ToString();
+                    range.ApiAddress = eval.address.street + " " + eval.address.city + " " + eval.address.zipcode + " " + eval.address.state;
                     break;
                 }
             }
             if (range == null)
             {
-                range = new EstimateRange();
-                range.IsRentFromAPI = false;
-                foreach (var eval in jsonModel.SearchResultssearchresults.response.results.result)
+                foreach (var eval in xmlModel.response.results)
                 {
                     if (eval.zestimate != null &&
                         eval.zestimate.amount != null &&
-                        !string.IsNullOrWhiteSpace(eval.zestimate.amount.text))
+                        !string.IsNullOrWhiteSpace(eval.zestimate.amount.Value))
                     {
-                        range = new EstimateRange();
-                        range.IsRentFromAPI = true;
-                        int estimate = int.Parse(eval.zestimate.amount.text);
+                        range = new Estimate();
+                        range.IsRentEstimateFromAPI = false;
+                        int estimate = int.Parse(eval.zestimate.amount.Value);
                         estimate = estimate / 100 * 5;
                         range.RentEstimate = estimate.ToString();
-                        range.HighRange = (estimate + (estimate / 100 * 10)).ToString();
-                        range.LowRange = (estimate - (estimate / 100 * 10)).ToString();
-                        range.Address = eval.address.street + " " + eval.address.city + " " + eval.address.zipcode + " " + eval.address.state;
+                        range.HighRentRange = (estimate + (estimate / 100 * 10)).ToString();
+                        range.LowRentRange = (estimate - (estimate / 100 * 10)).ToString();
+                        range.ApiAddress = eval.address.street + " " + eval.address.city + " " + eval.address.zipcode + " " + eval.address.state;
+
                         break;
                     }
                 }
             }
-            return Ok(range);
+            if (range != null)
+            {
+                return Ok(_dbApiRepository.RecordEstimate(range));
+            }
+            return BadRequest();
         }
 
     }

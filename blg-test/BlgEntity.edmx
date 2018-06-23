@@ -17,6 +17,18 @@
           <Property Name="Zipcode" Type="varchar" MaxLength="30" />
           <Property Name="State" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Estimates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="ApiAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="RentEstimate" Type="nvarchar" MaxLength="20" />
+          <Property Name="LowRentRange" Type="nvarchar" MaxLength="20" />
+          <Property Name="HighRentRange" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsRentEstimateFromAPI" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +42,7 @@
         </EntityType>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estimates" EntityType="Self.Estimates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -50,6 +63,7 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Addresses" EntityType="Model.Address" />
+          <EntitySet Name="Estimates" EntityType="Model.Estimate" />
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -62,6 +76,18 @@
           <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Zipcode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Estimate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="ApiAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RentEstimate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LowRentRange" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HighRentRange" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsRentEstimateFromAPI" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -90,6 +116,19 @@
                 <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
                 <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estimates">
+            <EntityTypeMapping TypeName="Model.Estimate">
+              <MappingFragment StoreEntitySet="Estimates">
+                <ScalarProperty Name="IsRentEstimateFromAPI" ColumnName="IsRentEstimateFromAPI" />
+                <ScalarProperty Name="HighRentRange" ColumnName="HighRentRange" />
+                <ScalarProperty Name="LowRentRange" ColumnName="LowRentRange" />
+                <ScalarProperty Name="RentEstimate" ColumnName="RentEstimate" />
+                <ScalarProperty Name="ApiAddress" ColumnName="ApiAddress" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
