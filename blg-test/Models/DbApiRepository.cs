@@ -12,6 +12,11 @@ namespace blg_test.Models
         {
             var entities = new Entities();
             newUser.Id = 0;
+            newUser.Email = newUser.Email.Trim();
+            newUser.FirstName = newUser.FirstName.Trim();
+            newUser.LastName = newUser.LastName.Trim();
+            newUser.Phone = newUser.Phone.Trim();
+            newUser.IpAddress = newUser.IpAddress.Trim();
             var result = entities.Users.Add(newUser);
 
             entities.SaveChanges();
@@ -29,6 +34,12 @@ namespace blg_test.Models
         {
             var entities = new Entities();
             newAddress.Id = 0;
+            newAddress.AddressLine1 = newAddress.AddressLine1.Trim();
+            newAddress.AddressLine2 = newAddress.AddressLine2.Trim();
+            newAddress.City = newAddress.City.Trim();
+            newAddress.State = newAddress.State.Trim();
+            newAddress.Zipcode = newAddress.Zipcode.Trim();
+
             var result = entities.Addresses.Add(newAddress);
 
             entities.SaveChanges();

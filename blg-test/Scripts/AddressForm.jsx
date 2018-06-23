@@ -11,9 +11,11 @@
             AddressLine1: "",
             AddressLine2: "",
             City: "",
+            State: "",
             Zipcode: "",
             AddressLine1IsValid: true,
             CityIsValid: true,
+            StateIsValid: true,
             ZipcodeIsValid: true,
             IsLoading: true
         };
@@ -63,6 +65,7 @@
                 AddressLine1: this.state.AddressLine1,
                 AddressLine2: this.state.AddressLine2,
                 City: this.state.City,
+                State: this.state.State,
                 Zipcode: this.state.Zipcode,
                 UserId: this.state.UserId
             }),
@@ -79,8 +82,8 @@
         this.setState({ IsLoading: true });
         if (this.validateField("", "")) {
             Promise.resolve(this.LogAddressIntoDb()).
-                then((userId) => {
-                    //  window.location.assign('/React/AddressForm/' + userId);
+                then((addressId) => {
+                    window.location.assign('/React/EstimateForm/' + addressId);
                 });
         }
         else {
@@ -92,6 +95,7 @@
         let isAdd1Valid = this.state.AddressLine1IsValid;
         let isCityValid = this.state.CityIsValid;
         let isZipCodeValid = this.state.ZipcodeIsValid;
+        let isStateValid = this.state.StateIsValid;
 
         switch (fieldName) {
             case 'AddressLine1':
@@ -105,19 +109,24 @@
                 break;
             case 'AddressLine2':
                 break;
+            case 'State':
+                isStateValid = value.length == 2;
+                break;
             default:
                 isAdd1Valid = this.state.AddressLine1.length > 0;
                 isCityValid = this.state.City.length > 0;
                 isZipCodeValid = this.state.Zipcode.length > 0;
+                isStateValid = this.state.State.length == 2;
                 break;
         }
 
         this.setState({
             AddressLine1IsValid: isAdd1Valid,
             CityIsValid: isCityValid,
+            StateIsValid: isStateValid,
             ZipcodeIsValid: isZipCodeValid
         });
-        return (isAdd1Valid && isCityValid && isZipCodeValid)
+        return (isAdd1Valid && isCityValid && isStateValid && isZipCodeValid)
     }
 
     render() {
@@ -149,6 +158,10 @@
                     <div className={"form-group " + (this.state.CityIsValid ? '' : 'has-error')}>
                         <label className="control-label"> City : </label>
                         <input type="text" className="form-control" name="City" value={this.state.City} onChange={this.handleInputChange} />
+                    </div>
+                    <div className={"form-group " + (this.state.StateIsValid ? '' : 'has-error')}>
+                        <label className="control-label"> State :</label>
+                        <input type="text" className="form-control" name="State" value={this.state.State} onChange={this.handleInputChange} />
                     </div>
                     <div className={"form-group " + (this.state.ZipcodeIsValid ? '' : 'has-error')}>
                         <label className="control-label"> Zipcode :</label>

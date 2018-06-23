@@ -18,5 +18,10 @@ namespace blg_test.Controllers
         {
             return View();
         }
+
+        public ActionResult EstimateForm()
+        {
+            return View();
+        }
     }
 }
