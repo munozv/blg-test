@@ -176,7 +176,7 @@ namespace blg_test.Models
         public partial class responseResult
         {
 
-            private uint zpidField;
+            private UInt32 zpidField;
 
             private responseResultLinks linksField;
 
@@ -189,7 +189,7 @@ namespace blg_test.Models
             private responseResultLocalRealEstate localRealEstateField;
 
             /// <remarks/>
-            public uint zpid
+            public UInt32 zpid
             {
                 get
                 {
@@ -329,7 +329,7 @@ namespace blg_test.Models
 
             private string streetField;
 
-            private uint zipcodeField;
+            private UInt32 zipcodeField;
 
             private string cityField;
 
@@ -353,7 +353,7 @@ namespace blg_test.Models
             }
 
             /// <remarks/>
-            public uint zipcode
+            public UInt32 zipcode
             {
                 get
                 {
@@ -792,7 +792,7 @@ namespace blg_test.Models
 
             private string currencyField;
 
-            private ushort valueField;
+            private UInt32 valueField;
 
             /// <remarks/>
             [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -810,7 +810,7 @@ namespace blg_test.Models
 
             /// <remarks/>
             [System.Xml.Serialization.XmlTextAttribute()]
-            public ushort Value
+            public UInt32 Value
             {
                 get
                 {
@@ -950,7 +950,7 @@ namespace blg_test.Models
 
             private string currencyField;
 
-            private ushort valueField;
+            private UInt32 valueField;
 
             /// <remarks/>
             [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -968,7 +968,7 @@ namespace blg_test.Models
 
             /// <remarks/>
             [System.Xml.Serialization.XmlTextAttribute()]
-            public ushort Value
+            public UInt32 Value
             {
                 get
                 {
@@ -990,7 +990,7 @@ namespace blg_test.Models
 
             private string currencyField;
 
-            private ushort valueField;
+            private UInt32 valueField;
 
             /// <remarks/>
             [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1008,7 +1008,7 @@ namespace blg_test.Models
 
             /// <remarks/>
             [System.Xml.Serialization.XmlTextAttribute()]
-            public ushort Value
+            public UInt32 Value
             {
                 get
                 {
@@ -1057,7 +1057,7 @@ namespace blg_test.Models
 
             private string nameField;
 
-            private ushort idField;
+            private UInt32 idField;
 
             private string typeField;
 
@@ -1103,7 +1103,7 @@ namespace blg_test.Models
 
             /// <remarks/>
             [System.Xml.Serialization.XmlAttributeAttribute()]
-            public ushort id
+            public UInt32 id
             {
                 get
                 {
