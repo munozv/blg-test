@@ -8,6 +8,7 @@
             Email: "",
             Phone: "",
             ClientIpAddress: "",
+            AddressId: 0,
             AddressLine1: "",
             AddressLine2: "",
             City: "",
@@ -15,10 +16,12 @@
             Zipcode: "",
             ApiAddress: "",
             RentEstimate: "",
+            EstimateId: "",
             LowRentEstimate: "",
             HighRentEstimate: "",
-            IsRentEstimateFromAPI: ""
-
+            IsRentEstimateFromAPI: "",
+            UserRent: "",
+            UserRentIsValid: true
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,7 +29,7 @@
 
     componentDidMount() {
         var hrefArray = window.location.href.split('/');
-
+       
         fetch('/api/addressData/' + hrefArray[hrefArray.length - 1], {
             method: 'GET',
             headers: {
@@ -35,6 +38,7 @@
         }).then(res => res.json())
             .then(json => {
                 this.setState({
+                    AddressId: hrefArray[hrefArray.length - 1],
                     AddressLine1: json.AddressLine1,
                     AddressLine2: json.AddressLine2,
                     City: json.City,
@@ -66,6 +70,7 @@
                 }).then(res => res.json())
                     .then(json => {
                         this.setState({
+                            EstimateId: json.Id,
                             ApiAddress: json.ApiAddress,
                             RentEstimate: json.RentEstimate,
                             LowRentEstimate: json.LowRentRange,
@@ -89,18 +94,15 @@
     }
 
     LogEstimateIntoDb() {
-        return fetch('/api/addressData', {
+        return fetch('/api/UserEstimateData', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                AddressLine1: this.state.AddressLine1,
-                AddressLine2: this.state.AddressLine2,
-                City: this.state.City,
-                Zipcode: this.state.Zipcode,
-                UserId: this.state.UserId
+                AddressId: this.state.AddressId,
+                RentEstimate: this.state.UserRent 
             }),
         }).then((response) => response.json())
             .then((responseJson) => {
@@ -115,8 +117,10 @@
         this.setState({ IsLoading: true });
         if (this.validateField("", "")) {
             Promise.resolve(this.LogEstimateIntoDb()).
-                then((addressId) => {
-                    // window.location.assign('/React/EstimateForm/' + addressId);
+                then((UserEstimateId) => {
+                    window.location.assign('/React/SendConfirmation?AddressId=' + this.state.AddressId
+                        + '&UserId=' + this.state.UserId + '&UserEstimateId=' + UserEstimateId
+                    + '&EstimateId=' + this.state.EstimateId);
                 });
         }
         else {
@@ -165,7 +169,13 @@
                 <br />
                 <label className="control-label">{'Rent was calculated from property Zestimate: ' + !this.state.IsRentEstimateFromAPI}</label>
                 <br />
-
+                <form onSubmit={this.handleSubmit} >
+                    <div className={"form-group " + (this.state.UserRentIsValid ? '' : 'has-error')}>
+                        <label className="control-label"> Put your rent if different :</label>
+                        <input type="text" className="form-control" name="UserRent" value={this.state.UserRent} onChange={this.handleInputChange} />
+                    </div>
+                    <input type="submit" name="SubmitButton" value="Submit" />
+                </form>
             </div>
         );
     }

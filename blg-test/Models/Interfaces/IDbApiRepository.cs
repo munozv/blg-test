@@ -13,6 +13,8 @@ namespace blg_test.Models.Interfaces
         blg_test.Address GetAddress(int id);
         Estimate RecordEstimate(Estimate est);
         Estimate GetEstimate(int id);
+        UserEstimate RecordUserEstimate(UserEstimate newUserEstimate);
+        UserEstimate GetUserEstimate(int id);
     }
 
 }

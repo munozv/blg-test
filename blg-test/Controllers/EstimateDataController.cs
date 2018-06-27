@@ -22,12 +22,11 @@ namespace blg_test.Controllers
             _dbApiRepository = new DbApiRepository();
         }
 
-        //[HttpPost]
-        //public IHttpActionResult Post([FromBody]Address newAddress)
-        //{
-        //    Address address = _dbApiRepository.RecordAddress(newAddress);
-        //    return Ok(address);
-        //}
+        public IHttpActionResult GetEstimateDataById(int id)
+        {
+            Estimate est = _dbApiRepository.GetEstimate(id);
+            return Ok(est);
+        }
 
         public IHttpActionResult GetEstimate(string address, string cityStateZip)
         {

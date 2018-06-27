@@ -28,5 +28,6 @@ namespace blg_test
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Estimate> Estimates { get; set; }
+        public virtual DbSet<UserEstimate> UserEstimates { get; set; }
     }
 }

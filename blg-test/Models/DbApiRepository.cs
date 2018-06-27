@@ -57,7 +57,7 @@ namespace blg_test.Models
         {
             var entities = new Entities();
             var result = entities.Estimates.Add(est);
-
+            entities.SaveChanges();
             return result;
         }
 
@@ -65,6 +65,22 @@ namespace blg_test.Models
         {
             var entities = new Entities();
             var result = entities.Estimates.Single(x => x.Id == id);
+            return result;
+        }
+
+        public UserEstimate RecordUserEstimate(UserEstimate newUserEstimate)
+        {
+            var entities = new Entities();
+            var result = entities.UserEstimates.Add(newUserEstimate);
+            entities.SaveChanges();
+
+            return result;
+        }
+
+        public UserEstimate GetUserEstimate(int id)
+        {
+            var entities = new Entities();
+            var result = entities.UserEstimates.Single(x => x.Id == id);
             return result;
         }
     }

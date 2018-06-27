@@ -29,6 +29,14 @@
           <Property Name="HighRentRange" Type="nvarchar" MaxLength="20" />
           <Property Name="IsRentEstimateFromAPI" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserEstimates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="RentEstimate" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -43,6 +51,7 @@
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estimates" EntityType="Self.Estimates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserEstimates" EntityType="Self.UserEstimates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -64,6 +73,7 @@
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Addresses" EntityType="Model.Address" />
           <EntitySet Name="Estimates" EntityType="Model.Estimate" />
+          <EntitySet Name="UserEstimates" EntityType="Model.UserEstimate" />
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -88,6 +98,14 @@
           <Property Name="LowRentRange" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="HighRentRange" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IsRentEstimateFromAPI" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserEstimate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="RentEstimate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -128,6 +146,15 @@
                 <ScalarProperty Name="LowRentRange" ColumnName="LowRentRange" />
                 <ScalarProperty Name="RentEstimate" ColumnName="RentEstimate" />
                 <ScalarProperty Name="ApiAddress" ColumnName="ApiAddress" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserEstimates">
+            <EntityTypeMapping TypeName="Model.UserEstimate">
+              <MappingFragment StoreEntitySet="UserEstimates">
+                <ScalarProperty Name="RentEstimate" ColumnName="RentEstimate" />
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
