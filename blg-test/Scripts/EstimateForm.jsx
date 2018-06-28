@@ -184,11 +184,12 @@
                 </div>
                 <br />
                 <div style={{ display: this.state.NoApiRent ? 'block' : 'none' }}>
-                    <label className="control-label">{'Unable to get a rent from Zillow.'}</label>
+                    <label className="control-label has-error">{'Unable to get a rent from Zillow.'}</label>
                 </div>
+                <br />
                 <form onSubmit={this.handleSubmit} >
                     <div className={"form-group " + (this.state.UserRentIsValid ? '' : 'has-error')}>
-                        <label className="control-label"> Put your rent if different :</label>
+                        <label className="control-label"> Please Enter your rent if different :</label>
                         <input type="text" className="form-control" name="UserRent" value={this.state.UserRent} onChange={this.handleInputChange} />
                     </div>
                     <input type="submit" name="SubmitButton" value="Submit" />

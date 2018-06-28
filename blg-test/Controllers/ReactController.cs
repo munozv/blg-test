@@ -50,7 +50,12 @@ namespace blg_test.Controllers
             {
                 From = new EmailAddress("admin@blg-test.azurewebsites.net", "blg-Test"),
                 Subject = "Thank you for using blg-test !",
-                HtmlContent = @"<style>
+
+                PlainTextContent = "Please allow html content."
+            };
+            if (estimate != null)
+            {
+                msg.HtmlContent = @"<style>
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -129,9 +134,91 @@ tr:nth-child(even) {
   <tr>
     <td>" + userEstimate.RentEstimate + @"</td>
   </tr>
-</table>",
-                PlainTextContent = "Please allow html content."
-            };
+</table>";
+            }
+            else
+            {
+                msg.HtmlContent = @"<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>User</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>IP Address</th>
+  </tr>
+  <tr>
+    <td>" + user.FirstName + " " + user.LastName + @"</td>
+    <td>" + user.Email + @"</td>
+    <td>" + user.Phone + @"</td>
+    <td>" + user.IpAddress + @"</td>
+  </tr>
+</table>
+
+  
+<h2>Address</h2>
+<table>
+  <tr>
+    <th>Address Line 1</th>
+    <th>Address Line 2</th>
+    <th>City</th>
+    <th>Zipcode</th>
+     <th>State</th>
+  </tr>
+  <tr>
+    <td>" + address.AddressLine1 + @"</td>
+    <td>" + address.AddressLine2 + @"</td>
+     <td>" + address.City + @"</td>
+    <td>" + address.Zipcode + @"</td>
+    <td>" + address.State + @"</td>
+  </tr>
+</table>
+  <h2>Api Estimate</h2>
+<table>
+  <tr>
+    <th>Api Address</th>
+    <th>Rent Estimate</th>
+    <th>Low Rent Estimate</th>
+    <th>High Rent Estimate</th>
+     <th>Is Rent From API</th>
+  </tr>
+  <tr>
+    <td>N/A</td>
+    <td>N/A</td>
+     <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+</table> 
+  <h2>User Estimate</h2>
+<table>
+  <tr>
+   <th>User Rent Estimate</th>
+   </tr>
+  <tr>
+    <td>" + userEstimate.RentEstimate + @"</td>
+  </tr>
+</table>";
+            }
             msg.AddTo(new EmailAddress(user.Email, user.FirstName + " " + user.LastName));
             client.SendEmailAsync(msg);
 
