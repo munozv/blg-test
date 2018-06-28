@@ -141,7 +141,24 @@
     }
 
     validateField(fieldName, value) {
-        return true;
+        let isUserRentValid = this.state.UserRentIsValid;
+        let numberRegex = /^[0-9]*$/;
+
+
+        switch (fieldName) {
+            case 'UserRent':
+                isUserRentValid = value.length > 0;
+                isUserRentValid = numberRegex.test(value);
+                break;
+            default:
+                isUserRentValid = this.state.UserRent.length > 0 && numberRegex.test(this.state.UserRent);
+                break;
+        }
+
+        this.setState({
+            UserRentIsValid: isUserRentValid
+        });
+        return (isUserRentValid);
     }
 
     render() {
