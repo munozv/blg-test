@@ -1,23 +1,21 @@
-﻿class UserForm extends React.Component {
+﻿class SendConfirmation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
        
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+       }
     render() {
         return (
-            <div className="UserForm">
+            <div className="SendConfirmation">
                 <br />
-                FINISHED !
+                Thank you for using blg-test ! An Email will be send to your address with all the informations.
             </div>
         );
     }
 }
 
 ReactDOM.render(
-    <UserForm />,
+    <SendConfirmation />,
     document.getElementById('content')
 );

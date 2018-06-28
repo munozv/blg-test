@@ -16,9 +16,10 @@
             Zipcode: "",
             ApiAddress: "",
             RentEstimate: "",
-            EstimateId: "",
+            EstimateId: 0,
             LowRentEstimate: "",
             HighRentEstimate: "",
+            NoApiRent: false,
             IsRentEstimateFromAPI: "",
             UserRent: "",
             UserRentIsValid: true
@@ -29,7 +30,7 @@
 
     componentDidMount() {
         var hrefArray = window.location.href.split('/');
-       
+
         fetch('/api/addressData/' + hrefArray[hrefArray.length - 1], {
             method: 'GET',
             headers: {
@@ -78,10 +79,21 @@
                             IsRentEstimateFromAPI: json.IsRentEstimateFromAPI,
                             IsLoading: false
                         });
-                    });
-
+                    }).catch(error => {
+                        this.setState({
+                            EstimateId: "0",
+                            NoApiRent: true
+                        });
+                    })
+            }).catch(error => {
+                this.setState({
+                    EstimateId: "0",
+                    NoApiRent: true
+                });
             });
     }
+
+
 
 
     handleInputChange(event) {
@@ -102,7 +114,7 @@
             },
             body: JSON.stringify({
                 AddressId: this.state.AddressId,
-                RentEstimate: this.state.UserRent 
+                RentEstimate: this.state.UserRent
             }),
         }).then((response) => response.json())
             .then((responseJson) => {
@@ -120,7 +132,7 @@
                 then((UserEstimateId) => {
                     window.location.assign('/React/SendConfirmation?AddressId=' + this.state.AddressId
                         + '&UserId=' + this.state.UserId + '&UserEstimateId=' + UserEstimateId
-                    + '&EstimateId=' + this.state.EstimateId);
+                        + '&EstimateId=' + this.state.EstimateId);
                 });
         }
         else {
@@ -158,17 +170,22 @@
                 <label className="control-label">{'State: ' + this.state.State}</label>
                 <br />
                 <label className="control-label">{'Zipcode: ' + this.state.Zipcode}</label>
+                <div style={{ display: this.state.NoApiRent ? 'none' : 'block' }}>
+
+                    <label className="control-label">{'Rent Estimate: ' + this.state.RentEstimate}</label>
+                    <br />
+                    <label className="control-label">{'Low Rent Range: ' + this.state.LowRentEstimate}</label>
+                    <br />
+                    <label className="control-label">{'High Rent Range: ' + this.state.HighRentEstimate}</label>
+                    <br />
+                    <label className="control-label">{'Address Reference: ' + this.state.ApiAddress}</label>
+                    <br />
+                    <label className="control-label">{'Rent was calculated from property Zestimate: ' + !this.state.IsRentEstimateFromAPI}</label>
+                </div>
                 <br />
-                <label className="control-label">{'Rent Estimate: ' + this.state.RentEstimate}</label>
-                <br />
-                <label className="control-label">{'Low Rent Range: ' + this.state.LowRentEstimate}</label>
-                <br />
-                <label className="control-label">{'High Rent Range: ' + this.state.HighRentEstimate}</label>
-                <br />
-                <label className="control-label">{'Address Reference: ' + this.state.ApiAddress}</label>
-                <br />
-                <label className="control-label">{'Rent was calculated from property Zestimate: ' + !this.state.IsRentEstimateFromAPI}</label>
-                <br />
+                <div style={{ display: this.state.NoApiRent ? 'block' : 'none' }}>
+                    <label className="control-label">{'Unable to get a rent from Zillow.'}</label>
+                </div>
                 <form onSubmit={this.handleSubmit} >
                     <div className={"form-group " + (this.state.UserRentIsValid ? '' : 'has-error')}>
                         <label className="control-label"> Put your rent if different :</label>
